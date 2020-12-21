@@ -63,7 +63,7 @@ function mqtt_messsageReceived(topic, message, packet) {
 
 	var topicArr = topic.split('/');
 
-	if (topic.includes('relay') && (topicArr[4] == 'power' || topicArr[4] ==  'energy') && parseInt(message_str) > 0) {
+	if ((topic.includes('relay') || topic.includes('light')) && (topicArr[4] == 'power' || topicArr[4] ==  'energy') && parseInt(message_str) > 0) {
 		
 		const sql = "SELECT id from devices WHERE device_name LIKE ?";
 		con.query(sql, [topicArr[1]], function (err, result, fields) {
